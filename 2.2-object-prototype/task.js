@@ -36,15 +36,15 @@ function getAverageMark(marks) {
 }
 
 function checkBirthday(birthday) {
-    const = new Date().valueOf();
+    let now = new Date().valueOf();
     birthday = new Date(birthday).valueOf();
-    const diff = now - birthday;
-    const age = diff / 1000 / 60 / 60 / 24 / 365.25;
+    let diff = now - birthday;
+    let age = diff / 1000 / 60 / 60 / 24 / 365.25;
     if (age > 18) {
         return true
     } else {
         return false
-    };
+    }
 
 
 }
