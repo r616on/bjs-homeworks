@@ -169,9 +169,6 @@ class StudentLog {
 }
 const log = new StudentLog('Олег Никифоров');
 
-log.addGrade(2, 'algebra');
-log.addGrade(4, 'algebra');
-log.addGrade(5, 'geometry');
-log.addGrade(4, 'geometry');
+
 
 console.log(log.getTotalAverage()); // 3,75
