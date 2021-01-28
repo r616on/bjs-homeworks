@@ -22,6 +22,9 @@ function memorize(fn, lim) {
    let memory = [
       { args: [3, 4], result: 7 },
    ];
+   if (memory.length > lim) {
+      memory.shift()
+   };
    return function newFunc(...args) {  //
       const arr = [...args];
       const search = memory.find(element => compareArrays(element.args, arr))
@@ -37,4 +40,16 @@ function memorize(fn, lim) {
       };
 
    };
+};
+function testCase(testFunction) {
+   const argument = [[1, 2, 3], [1, 2], [1, 2, 3], [1, 2], [9, 5, 2, 4]];
+   console.time(testFunction);
+   for (let i = 0; i <= 100; i++) {
+      argument.forEach(element => testFunction(element))
+
+      if (i === 100) {
+         console.timeEnd(testFunction);
+      }
+   }
+
 };
