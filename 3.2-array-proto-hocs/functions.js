@@ -2,33 +2,19 @@ console.clear();
 const weapons = [new Knife(), new Staff(), new Axe(), new StormStaff(), new LongBow(), new Bow()];
 
 function getNames() {
-   const weaponsName = [];
-   weapons.filter(weapons => weaponsName.push(weapons.name));
-   return weaponsName;
+   return weapons.map(weapons => weapons.name);
 };
 function getCountReliableWeapons(durability) {
-   const a = weapons.filter(weapons => weapons.initDurability > durability);
-   return a.length;
+   return weapons.filter(weapons => weapons.initDurability > durability).length
+
 };
 function hasReliableWeapons(durability) {
-   const a = weapons.filter(weapons => weapons.initDurability > durability);
-   if (a.length < 1) {
-      return 0
-   } else {
-      return 1
-   }
+   return weapons.some(weapons => weapons.initDurability > durability);
+
 };
 function getReliableWeaponsNames(durability) {
-   const weaponsName = [];
-   const a = weapons.filter(weapons => {
-      if (weapons.initDurability > durability) {
-         weaponsName.push(weapons.name);
-      }
-   });
-   return weaponsName;
+   return weapons.filter(weapons => weapons.initDurability > durability).map(weapons => weapons.name);
 };
 function getTotalDamage() {
-   let summ = 0;
-   weapons.filter(weapons => summ = summ + weapons.attack);
-   return summ;
+   return weapons.reduce((total, weapons) => total + weapons.attack, 0)
 };
