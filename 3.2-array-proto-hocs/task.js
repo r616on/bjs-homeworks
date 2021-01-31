@@ -4,7 +4,7 @@ function sleep(milliseconds) {
 }
 function sum(...args) {
    // Замедление на половину секунды.
-   sleep(10); // Можно использовать другое значение замедления.
+   //sleep(10); // Можно использовать другое значение замедления.
    return args.reduce((sum, arg) => {
       return sum += +arg;
    }, 0);
@@ -20,9 +20,8 @@ function compareArrays(arr1, arr2) {
 function memorize(fn, lim) {
    let memory = [];
 
-   return function newFunc(...args) {  //
-      const arr = [...args];
-      const search = memory.find(element => compareArrays(element.args, arr))
+   return function newFunc(...args) {
+      const search = memory.find(element => compareArrays(element.args, args))
       if (memory.length > lim) {
          memory.shift()
       };
@@ -32,7 +31,7 @@ function memorize(fn, lim) {
       }
       const result = fn(...args);
       memory.push({
-         args: arr,
+         args: args,
          result: result,
       })
       //console.log("Результат не из памяти")
@@ -49,5 +48,5 @@ function testCase(testFunction) {
 
 };
 
-testCase(sum);
-testCase(memorize(sum, 30))
+//testCase(sum);
+//testCase(memorize(sum, 30))
