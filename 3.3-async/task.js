@@ -8,7 +8,7 @@ class AlarmClock {
          throw new Error('Невозможно идентифицировать будильник. Параметр id не передан');
       };
       if (this.alarmCollection.find(element => element.id === id)) {
-         console.error("ошибка")
+         console.error("Будильник с таким id уже существует")
          return 0
       } else {
          this.alarmCollection.push({
@@ -47,18 +47,21 @@ class AlarmClock {
       return `${hour}:${minutes}`
 
    }
+   checkClock(item) {
+      if (item.time === this.getCurrentFormattedTime()) {
+         item.callback();
+      }
+   }
 
    start() {
-      let curentTime = this.getCurrentFormattedTime();
-
-      function checkClock(item) {
-         if (item.time === curentTime) {
-            item.callback();
-         }
-      }
+      //   function checkClock(item) {
+      //       if (item.time === this.getCurrentFormattedTime()) {
+      //          item.callback();
+      //       }
+      //    }
       const func = () => {
          this.alarmCollection.forEach(item => {
-            checkClock(item)
+            this.checkClock(item)
          });
       };
 
@@ -74,6 +77,7 @@ class AlarmClock {
       }
    }
    printAlarms() {
+      console.log(`Печать всех будильников в колличестве ${this.alarmCollection.length}`)
       this.alarmCollection.forEach(item => {
          console.log(`Будильник №${item.id} заведен на ${item.time} `)
       });
@@ -83,10 +87,15 @@ class AlarmClock {
       this.alarmCollection = [];
    }
 }
-// let phoneAlarm = new AlarmClock();
-// phoneAlarm.addClock("22:19", () => console.log("Пора вставать"), 1);
-// phoneAlarm.addClock("22:18", () => { console.log("Пора вставать1") }, 2);
-// console.log(phoneAlarm.alarmCollection);
-// phoneAlarm.start();
+let phoneAlarm = new AlarmClock();
+phoneAlarm.addClock("22:55", () => console.log("Пора вставать"), 1);
+phoneAlarm.addClock("22:56", () => { console.log("Давай,вставай уже!"); phoneAlarm.removeClock(2) }, 2);
+phoneAlarm.addClock("22:56", () => { console.log("Иди умываться!"); }, 2);
+phoneAlarm.addClock("22:58", () => {
+   console.log("Давай,вставай уже!");
+   phoneAlarm.printAlarms();
+   phoneAlarm.clearAlarms();
+}, 3);
+phoneAlarm.start();
 
 
