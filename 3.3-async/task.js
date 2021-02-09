@@ -47,23 +47,39 @@ class AlarmClock {
       return `${hour}:${minutes}`
 
    }
+
+   //Так работает
    checkClock(item) {
       if (item.time === this.getCurrentFormattedTime()) {
          item.callback();
       }
    }
+   //
+
 
    start() {
-      //   function checkClock(item) {
-      //       if (item.time === this.getCurrentFormattedTime()) {
-      //          item.callback();
-      //       }
+      //так не работает!
+      // function checkClock(item) {
+      //    if (item.time ===  getCurrentFormattedTime()) {
+      //       item.callback();
       //    }
+      // }
+
+      // const func = () => {
+      //    this.alarmCollection.forEach(item => {
+      //       checkClock(item)
+      //    });
+      // };
+      //так не работает!
+
+
+      //Так работает
       const func = () => {
          this.alarmCollection.forEach(item => {
             this.checkClock(item)
          });
       };
+      //
 
       if (!this.timerId) {
          this.timerId = setInterval(func, 1000);
